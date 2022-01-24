@@ -1,52 +1,52 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
-import java.util.ArrayList;
 
 class UserSolution {
-	private ArrayList<ArrayList<Integer>> childList;
-    private static int [] childCnt;
     private static boolean [] isVisit;
-
-	public UserSolution() {
-		this.childList = new ArrayList<ArrayList<Integer>>();
-	}
+	private static int [][] childList;
+    private static int [] childCnt;
+	public static int answer = -1;
+	public static int temp = -1;
 
 	public void dfs_init(int N, int[][] path) {
-        childCnt = new int[100];
+        childList = new int[100][100];
+		childCnt = new int[100];
         isVisit = new boolean[100];
 
         for (int i = 0; i < 100; i++) {
-            childList.add(new ArrayList<Integer>());
+			for (int j = 0; j < 100; j++)
+				childList[i][j] = 0;
+
             childCnt[i] = 0;
             isVisit[i] = false;
         }
 
 		for (int i = 0; i < path.length; i++) {
-            childList.get(path[i][0]).add(path[i][1]);
+			childList[path[i][0]][path[i][1]] = 1;
             childCnt[path[i][0]]++;
         }
 	}
 	
 	public int dfs(int N) {
-        if (childCnt[N] == 0 || childList.get(N).size() == 0)
-            return -1;
-
         isVisit[N] = true;
-		for (int i = 0; i < childList.get(N).size(); i++) {
-			if (childList.get(N).get(i) > N)
-				return childList.get(N).get(i);
 
-            if (childList.get(N).get(i) > 0 && !isVisit[i]) {
-                dfs(i);
+		if (childCnt[N] == 0)
+			return N;
+
+		for (int next = 0; next < childList[N].length; next++) {
+			if (childList[N][next] > 0 && !isVisit[next]) {
+                temp = dfs(next);
+				if (temp > answer)
+					answer = temp;
             }
         }
-
-		return -1;
+		
+		return answer;
 	}
 }
 
-public class BasicDFS {
+public class 기초DFS연습 {
 
 	private final static int MAX_N = 40;
 	private final static int MAX_K = 98;
