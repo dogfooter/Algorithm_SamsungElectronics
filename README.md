@@ -3,7 +3,6 @@
 - - -
 #### - SW Expert Academy에서 제공하는 문제 모음(https://swexpertacademy.com/)   
 #### - 모든 문제의 출처는 SW Expert Academy에서 제공하는 문제
-#### - 개인적인 솔루션의 저장 용도이며, 상업적 용도의 게시가 아님을 밝힘
 - - -
 
 
